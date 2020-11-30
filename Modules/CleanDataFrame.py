@@ -9,6 +9,7 @@ def binarize_col(df, col, value_one_lst):
 	df - a dataframe with an additional column that indicates binary form of the original col   
 	'''
 
+	# drop all rows with Nan values in col because the row is of no value when the response varialbe is Nan
 	df = df.dropna(subset=[col], axis=0)
 	df.loc[df[col].isin(value_one_lst), str(col)+'_bin'] = 1
 	df.loc[~df[col].isin(value_one_lst), str(col)+'_bin'] = 0
@@ -26,6 +27,8 @@ def clean_df(df, col, remv_lst=None):
 	df - a cleaned dataframe
 	'''
 
+	# drop all rows with Nan values in col because we are interested in how col, the feature column, interacts with the response variable. 
+	# the Nan value in feature col would have little to no meaning for our purposes
 	df = df.dropna(subset =[col], axis=0)
 	if remv_lst:
 		df = df.drop(df[df[col].isin(remv_lst)].index)
@@ -70,6 +73,8 @@ def clean_dev_type(df, col, devTypes_lst):
 	# combine all different types of developer types entries into one column
 	df.loc[:, col] = df[devTypes_lst].apply(lambda x: ';'.join(x.dropna().astype(str)).strip(),axis=1)
 
+	# drop all rows with Nan values in col because we are interested in how col, the feature column, interacts with the response variable. 
+	# the Nan value in feature col would have little to no meaning for our purposes
 	df.dropna(subset =[col], axis=0)
 
 	# drop where 'DeveloperTypeCombined' is empty (not null)
