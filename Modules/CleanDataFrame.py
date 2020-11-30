@@ -10,8 +10,8 @@ def binarize_col(df, col, value_one_lst):
 	'''
 
 	df = df.dropna(subset=[col], axis=0)
-	df.loc[df[df[col].isin(value_one_lst)].index, str(col)+'_bin'] = 1
-	df.loc[df[~df[col].isin(value_one_lst)].index, str(col)+'_bin'] = 0
+	df.loc[df[col].isin(value_one_lst), str(col)+'_bin'] = 1
+	df.loc[~df[col].isin(value_one_lst), str(col)+'_bin'] = 0
 	return df
 
 

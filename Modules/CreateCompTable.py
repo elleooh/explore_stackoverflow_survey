@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import defaultdict
 import matplotlib.pyplot as plt
-import InferentialStatistics as s
+import Modules.InferentialStatistics as s
 
 def total_count(df, col1, col2, look_for):
     '''
