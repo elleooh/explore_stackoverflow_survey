@@ -1,6 +1,6 @@
 from collections import defaultdict
 import pandas as pd
-import Modules.InferentialStatistics as s
+import Modules.inferential_statistics as s
 
 def total_count(df, col1, col2, look_for):
     '''
