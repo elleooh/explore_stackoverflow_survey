@@ -1,6 +1,5 @@
-import pandas as pd
 from collections import defaultdict
-import matplotlib.pyplot as plt
+import pandas as pd
 import Modules.InferentialStatistics as s
 
 def total_count(df, col1, col2, look_for):
@@ -30,11 +29,11 @@ def total_count(df, col1, col2, look_for):
 
 def create_value_count_table(df, col, possible_vals_lst):
     '''
-    INPUT 
+    INPUT
     df - a dataframe holding the column of interest
     col - col name of your interest
     possible_vals_lst - a list of possible value for the col
-    
+
     OUTPUT
     new_df - a dataframe with the count of respondents associated with each value in col
     '''
@@ -47,16 +46,17 @@ def create_value_count_table(df, col, possible_vals_lst):
 
 def create_comp_table(df1, df2, col1, col2, col3, dic):
     '''
-    INPUT 
+    INPUT
     df1 - a dataframe where the response variable value == 1
     df2 - a dataframe where the response variable value == 0
     col1 - designated col name for response variable value == 1 (e.g. 'agree %')
     col2 - designated col name for response variable value == 0 (e.g. 'disagree %')
     col3 - designated col name (e.g.'difference %')
     dic - dictionary that holds the ranking for each feature column value based on a specified order
-        
+
     OUTPUT
-    comp_df - a dataframe with comparison of response variable value with regard to each feature variable category
+    comp_df - a dataframe with comparison of response variable value
+    with regard to each feature variable category
     '''
 
     # calculate percentage
@@ -80,12 +80,12 @@ def create_comp_table(df1, df2, col1, col2, col3, dic):
 
 def plot_comp_table(df, col_ind, col_res, rank_order_lst=None):
     '''
-    INPUT 
+    INPUT
     df - a dataframe holding the column of interest
     col_ind - the column name of the independent variable
     col_res - the column name of the response variable
     rank_order_lst - designated col name for response variable value == 0 (e.g. 'disagree %')
-        
+
     OUTPUT
     No output - display comp_df based on the degree of the difference %
     '''
@@ -101,19 +101,14 @@ def plot_comp_table(df, col_ind, col_res, rank_order_lst=None):
 
     col_ind_dic = None
     if rank_order_lst:
-        # create a dictionary with ranking to be able to plot by rank later 
+        # create a dictionary with ranking to be able to plot by rank later
         col_ind_dic = dict(zip(rank_order_lst, range(len(rank_order_lst))))
 
     comp_df = create_comp_table(agree_perc, disagree_perc, 'agree %', 'disagree %', 'difference %', col_ind_dic)
 
     # check if the diff is statistically significant
     for val in possible_vals_lst:
-        comp_df.loc[comp_df['value'] == val, 'significant?'] = s.check_significance(df, col_ind, col_res, val)
+        comp_df.loc[comp_df['value'] == val, 'significant?'] \
+        = s.check_significance(df, col_ind, col_res, val)
 
     return comp_df.style.bar(subset=['difference %'], align='mid', color=['#d65f5f', '#5fba7d'])
-
-
-
-
-
-
