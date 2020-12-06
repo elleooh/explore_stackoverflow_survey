@@ -46,7 +46,7 @@ The notebook imports modules from 4 `.py` files in the `Module` directory.
 
 ## Results <a name="results"></a>
 
-A Medium post with summarized findings can be found [here](....).
+A Medium post with summarized findings can be found [here](https://medium.com/@elleooh/who-are-those-programmers-part-1-on-competitiveness-ffa13fde024b).
 
 Give it a clap if you enjoyed reading it!
 
